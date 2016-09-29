@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="mk">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="angular.js"></script>
+    <script>
+        var app=angular.module('mk',[]);
+        app.controller('shopping',function($scope){
+            $scope.data=[
+                {name:"apple",count:2,price:3.45},
+                {name:"orange",count:4,price:1.23},
+                {name:"banana",count:3,price:3.43},
+                {name:'todou',count:6,price:2.80}
+            ];
+            $scope.sum=function(){
+                var result=0;
+                angular.forEach($scope.data,function(item,name){
+                    result+=item.count*item.price;
+                });
+                return result;
+            };
+        });
+    </script>
+</head>
+<body ng-controller="shopping">
+<dl ng-repeat="item in data">
+    <dd>名称：{{item.name}}</dd>
+    <dd>价格：{{item.price}}</dd>
+    <dd>数量：<input type="number" ng-model="item.count"></dd>
+    <dd>小计：{{(item.price*item.count).toFixed(2)}}</dd>
+</dl>
+<div>总计：{{sum()|currency:rmb}}</div>
+</body>
+</html>
